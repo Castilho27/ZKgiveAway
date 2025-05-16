@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Lock, Shield, Coins, ArrowRight, ChevronRight, Gift, Sparkles } from "lucide-react"
 import RequestForm from "@/components/request-form"
@@ -7,31 +6,44 @@ import CryptoDonationForm from "@/components/donation/crypto-donation-form"
 import { ProjectCard } from "@/components/project-card"
 import { TestimonialCard } from "@/components/testimonial-card"
 import { DonateButton } from "@/components/donate-button"
+import { ScrollToTop } from "@/components/scroll-to-top"
+import Link from "next/link"
+import { useEffect, useState } from "react"
+import Image from "next/image"
 
 export default function Home() {
+  // Para evitar erro de hydration, defina o ano fixo ou use um valor seguro para SSR
+  const year = 2025
+
   return (
     <div className="min-h-screen bg-white">
-      <header className="container mx-auto py-6 px-4 md:px-6">
+      <header id="top" className="container mx-auto py-6 px-4 md:px-6">
         <div className="flex justify-between items-center">
           <Link href="/" className="flex items-center gap-2">
-            <div className="bg-[#FFCC33] p-2 rounded-md">
-              <span className="font-bold text-xl">ZK</span>
+            <div className="w-32 h-10 bg-white rounded-md flex items-center justify-center">
+              <Image
+  src="/images/lofo-Photoroom.png"
+  alt="Logo ZKgiveAway"
+  width={200}
+  height={100}
+  className="mb--4"
+  priority
+/>
             </div>
-            <span className="font-bold text-xl">ZKgiveAway</span>
           </Link>
           <nav className="hidden md:flex gap-8">
-            <Link href="/" className="font-medium hover:text-[#FFCC33] transition-colors">
+            <a href="#top" className="font-medium hover:text-[#FFCC33] transition-colors">
               Início
-            </Link>
-            <Link href="/about" className="font-medium hover:text-[#FFCC33] transition-colors">
+            </a>
+            <a href="#about" className="font-medium hover:text-[#FFCC33] transition-colors">
               Sobre
-            </Link>
-            <Link href="/projects" className="font-medium hover:text-[#FFCC33] transition-colors">
+            </a>
+            <a href="#projects" className="font-medium hover:text-[#FFCC33] transition-colors">
               Projetos
-            </Link>
-            <Link href="/donate" className="font-medium hover:text-[#FFCC33] transition-colors">
+            </a>
+            <a href="#donate" className="font-medium hover:text-[#FFCC33] transition-colors">
               Doar
-            </Link>
+            </a>
           </nav>
           <ConnectWalletButton />
         </div>
@@ -39,7 +51,7 @@ export default function Home() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-[#FFCC33] to-[#FFA500] py-20 md:py-32">
+        <section className="relative overflow-hidden bg-[#FFCC33] py-20 md:py-32">
           <div className="absolute inset-0 bg-[url('/placeholder.svg?height=800&width=1600')] opacity-10 bg-cover bg-center"></div>
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -47,7 +59,7 @@ export default function Home() {
                 <div>
                   <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white">
                     Doações Anônimas, <br />
-                    <span className="text-black">Impacto Real</span>
+                    <span className="text-white">Impacto Real</span>
                   </h1>
                 </div>
                 <p className="text-lg md:text-xl text-white/90 max-w-md">
@@ -64,7 +76,7 @@ export default function Home() {
                     Solicitar Ajuda
                   </Button>
                 </div>
-                <div className="flex items-center gap-6 pt-4">
+                <div className="flex items-start pt-4">
                   <div className="inline-block bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-medium">
                     Tecnologia Blockchain para o Bem
                   </div>
@@ -74,7 +86,14 @@ export default function Home() {
                 <div className="bg-white p-8 rounded-3xl shadow-xl max-w-md mx-auto transform hover:scale-105 transition-transform duration-300">
                   {/* Espaço para a foto que será inserida depois */}
                   <div className="aspect-video rounded-xl bg-gray-100 flex items-center justify-center">
-                    <p className="text-gray-400 text-sm">Imagem será inserida aqui</p>
+                    <Image
+  src="/images/ideia1.png"
+  alt="Logo ZKgiveAway"
+  width={120}
+  height={40}
+  className="mb-6"
+  priority
+/>
                   </div>
                 </div>
               </div>
@@ -83,8 +102,8 @@ export default function Home() {
           <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div>
         </section>
 
-        {/* How It Works */}
-        <section className="container mx-auto px-4 md:px-6 py-20 md:py-32">
+        {/* How It Works / About Section */}
+        <section id="about" className="container mx-auto px-4 md:px-6 py-20 md:py-32">
           <div className="text-center mb-16">
             <div className="inline-block bg-[#FFCC33]/10 px-4 py-1 rounded-full text-sm font-medium text-[#FFCC33] mb-4">
               Processo Simplificado
@@ -105,9 +124,9 @@ export default function Home() {
               <p className="text-gray-600">
                 Organizações e indivíduos podem se cadastrar com informações mínimas, verificadas com segurança.
               </p>
-              <Link href="/about" className="inline-flex items-center text-[#FFCC33] font-medium mt-4 hover:underline">
+              <a href="#about" className="inline-flex items-center text-[#FFCC33] font-medium mt-4 hover:underline">
                 Saiba mais <ChevronRight className="h-4 w-4 ml-1" />
-              </Link>
+              </a>
             </div>
 
             <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm text-center hover:shadow-md transition-shadow duration-300">
@@ -118,9 +137,9 @@ export default function Home() {
               <p className="text-gray-600">
                 Doe sem revelar sua identidade, garantindo que sua contribuição chegue às mãos certas.
               </p>
-              <Link href="/about" className="inline-flex items-center text-[#FFCC33] font-medium mt-4 hover:underline">
+              <a href="#about" className="inline-flex items-center text-[#FFCC33] font-medium mt-4 hover:underline">
                 Saiba mais <ChevronRight className="h-4 w-4 ml-1" />
-              </Link>
+              </a>
             </div>
 
             <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm text-center hover:shadow-md transition-shadow duration-300">
@@ -129,15 +148,15 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-bold mb-4">Rastreamento Transparente</h3>
               <p className="text-gray-600">Acompanhe o impacto da sua doação sem comprometer sua privacidade.</p>
-              <Link href="/about" className="inline-flex items-center text-[#FFCC33] font-medium mt-4 hover:underline">
+              <a href="#about" className="inline-flex items-center text-[#FFCC33] font-medium mt-4 hover:underline">
                 Saiba mais <ChevronRight className="h-4 w-4 ml-1" />
-              </Link>
+              </a>
             </div>
           </div>
         </section>
 
         {/* Featured Projects */}
-        <section className="bg-gray-50 py-20 md:py-32">
+        <section id="projects" className="bg-gray-50 py-20 md:py-32">
           <div className="container mx-auto px-4 md:px-6">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
               <div>
@@ -218,7 +237,10 @@ export default function Home() {
         </section>
 
         {/* Request and Donate Section */}
-        <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-20 md:py-32 relative overflow-hidden">
+        <section
+          id="donate"
+          className="bg-gradient-to-br from-gray-50 to-gray-100 py-20 md:py-32 relative overflow-hidden"
+        >
           <div className="absolute inset-0 bg-[url('/placeholder.svg?height=800&width=1600')] opacity-5 bg-cover bg-center"></div>
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <div className="text-center mb-16">
@@ -232,7 +254,7 @@ export default function Home() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-12 items-start">
-              <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100 h-full">
+              <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="bg-[#FFCC33]/10 p-3 rounded-full">
                     <Gift className="h-6 w-6 text-[#FFCC33]" />
@@ -242,7 +264,7 @@ export default function Home() {
                 <RequestForm />
               </div>
 
-              <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100 h-full">
+              <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100 self-start">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="bg-[#FFCC33]/10 p-3 rounded-full">
                     <Sparkles className="h-6 w-6 text-[#FFCC33]" />
@@ -284,94 +306,44 @@ export default function Home() {
 
       <footer className="bg-gray-900 text-white py-16">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid md:grid-cols-4 gap-8 mb-12">
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
             <div>
-              <div className="flex items-center gap-2 mb-6">
-                <div className="bg-[#FFCC33] p-2 rounded-md">
-                  <span className="font-bold text-xl text-black">ZK</span>
-                </div>
-                <span className="font-bold text-xl">ZKgiveAway</span>
+              <div className="w-40 h-12 bg-gray-900 rounded-md flex items-center justify-center mb-6">
+                <Image
+  src="/images/Faviicon.png"
+  alt="Logo ZKgiveAway"
+  width={120}
+  height={40}
+  className="mb-6"
+  priority
+/>
               </div>
               <p className="text-gray-400 mb-6">
                 Plataforma de doações anônimas usando tecnologia blockchain para garantir privacidade e transparência.
               </p>
-              <div className="flex gap-4">
-                <a href="#" className="text-gray-400 hover:text-[#FFCC33]">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                  </svg>
-                </a>
-                <a href="#" className="text-gray-400 hover:text-[#FFCC33]">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
-                  </svg>
-                </a>
-                <a href="#" className="text-gray-400 hover:text-[#FFCC33]">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                  </svg>
-                </a>
-              </div>
             </div>
             <div>
               <h3 className="font-bold text-lg mb-4">Links Rápidos</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
+                  <a href="#top" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
                     Início
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href="/about" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
+                  <a href="#about" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
                     Sobre Nós
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href="/projects" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
+                  <a href="#projects" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
                     Projetos
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href="/donate" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
+                  <a href="#donate" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
                     Doar
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
-                    Contato
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -379,91 +351,35 @@ export default function Home() {
               <h3 className="font-bold text-lg mb-4">Recursos</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/faq" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
+                  <a href="/faq" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
                     FAQ
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href="/blog" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
+                  <a href="/blog" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
                     Blog
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href="/tutorials" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
+                  <a href="/tutorials" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
                     Tutoriais
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href="/support" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
+                  <a href="/support" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
                     Suporte
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-bold text-lg mb-4">Contato</h3>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-gray-400 mt-1"
-                  >
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                  </svg>
-                  <span className="text-gray-400">+55 (11) 9999-9999</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-gray-400 mt-1"
-                  >
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22,6 12,13 2,6"></polyline>
-                  </svg>
-                  <span className="text-gray-400">contato@zkgiveaway.com</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-gray-400 mt-1"
-                  >
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                  <span className="text-gray-400">São Paulo, SP - Brasil</span>
+                  </a>
                 </li>
               </ul>
             </div>
           </div>
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>© {new Date().getFullYear()} ZKgiveAway. Todos os direitos reservados.</p>
+            <p>© {year} ZKgiveAway. Todos os direitos reservados.</p>
           </div>
         </div>
       </footer>
+
+      <ScrollToTop />
     </div>
   )
 }
