@@ -1,4 +1,3 @@
-import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
@@ -11,7 +10,13 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "ZKgiveAway - Doações Anônimas",
   description: "Faça doações anônimas usando tecnologia blockchain",
-    generator: 'v0.dev'
+  generator: 'v0.dev',
+  icons: {
+    icon: [
+      { url: '/favicon.ico' }, // Padrão para maioria dos navegadores
+      { url: '/Faviicon.png', type: 'image/png' }, // Para dispositivos modernos
+    ],
+  },
 }
 
 export default function RootLayout({

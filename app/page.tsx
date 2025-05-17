@@ -11,8 +11,8 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import Image from "next/image"
 
+
 export default function Home() {
-  // Para evitar erro de hydration, defina o ano fixo ou use um valor seguro para SSR
   const year = 2025
 
   return (
@@ -22,13 +22,13 @@ export default function Home() {
           <Link href="/" className="flex items-center gap-2">
             <div className="w-32 h-10 bg-white rounded-md flex items-center justify-center">
               <Image
-  src="/images/lofo-Photoroom.png"
-  alt="Logo ZKgiveAway"
-  width={200}
-  height={100}
-  className="mb--4"
-  priority
-/>
+                src="/images/lofo-Photoroom.png"
+                alt="Logo ZKgiveAway"
+                width={200}
+                height={100}
+                className="mb--4"
+                priority
+              />
             </div>
           </Link>
           <nav className="hidden md:flex gap-8">
@@ -50,16 +50,35 @@ export default function Home() {
       </header>
 
       <main>
-        {/* Hero Section */}
-        <section className="relative overflow-hidden bg-[#FFCC33] py-20 md:py-32">
-          <div className="absolute inset-0 bg-[url('/placeholder.svg?height=800&width=1600')] opacity-10 bg-cover bg-center"></div>
-          <div className="container mx-auto px-4 md:px-6 relative z-10">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="space-y-8">
+        {/* Hero Section Modificada */}
+        <section className="relative bg-[#FFCC33] min-h-[80vh] md:min-h-[90vh] overflow-hidden">
+          {/* Imagem de fundo que ocupa toda a seção amarela */}
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/images/FundoAjuda.png"
+              alt="Background Hero"
+              fill
+              className="object-cover"
+              priority
+              quality={100}
+            />
+            <div className="absolute inset-0 bg-black/10"></div>
+          </div>
+
+          <div className="container mx-auto px-4 md:px-6 relative z-10 h-full flex items-start">
+            <div className="grid md:grid-cols-2 gap-12 items-center w-full py-20">
+              <div className="space-y-8 text-white mt--10">
+                <Image
+                  src="/images/branco.png"
+                  alt="."
+                  width={200}
+                  height={100}
+                  priority
+                />
                 <div>
-                  <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white">
+                  <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
                     Doações Anônimas, <br />
-                    <span className="text-white">Impacto Real</span>
+                    <span>Impacto Real</span>
                   </h1>
                 </div>
                 <p className="text-lg md:text-xl text-white/90 max-w-md">
@@ -69,12 +88,18 @@ export default function Home() {
                 <div className="flex flex-wrap gap-4">
                   <DonateButton />
                   <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-white text-black hover:bg-white/10 hover:text-white rounded-full px-8 bg-white/80"
-                  >
-                    Solicitar Ajuda
-                  </Button>
+  size="lg"
+  className="
+    bg-white hover:bg-gray-100 text-black 
+    rounded-full px-8 relative
+    transition-all duration-200 ease-out
+    hover:scale-[1.02] active:scale-[0.98]
+    border border-gray-200 hover:border-gray-300
+    shadow-sm hover:shadow-md
+  "
+>
+  Solicitar Ajuda
+</Button>
                 </div>
                 <div className="flex items-start pt-4">
                   <div className="inline-block bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-medium">
@@ -82,21 +107,9 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="relative">
-                <div className="bg-white p-8 rounded-3xl shadow-xl max-w-md mx-auto transform hover:scale-105 transition-transform duration-300">
-                  {/* Espaço para a foto que será inserida depois */}
-                  <div className="aspect-video rounded-xl bg-gray-100 flex items-center justify-center">
-                    <Image
-  src="/images/ideia1.png"
-  alt="Logo ZKgiveAway"
-  width={120}
-  height={40}
-  className="mb-6"
-  priority
-/>
-                  </div>
-                </div>
-              </div>
+              
+              {/* Espaço reservado para alinhamento */}
+              <div className="hidden md:block"></div>
             </div>
           </div>
           <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div>
@@ -176,8 +189,8 @@ export default function Home() {
             <div className="grid md:grid-cols-3 gap-8">
               <ProjectCard
                 title="Água Potável para Comunidades"
-                description="Projeto que leva água potável para comunidades rurais sem acesso a saneamento básico."
-                image="/placeholder.svg?height=300&width=400"
+                description="Projeto que leva água potável para comunidades rurais."
+                image="/images/agua.png"
                 category="Infraestrutura"
                 goal={50000}
                 raised={32500}
@@ -185,7 +198,7 @@ export default function Home() {
               <ProjectCard
                 title="Educação Digital para Todos"
                 description="Fornecendo computadores e acesso à internet para escolas em áreas carentes."
-                image="/placeholder.svg?height=300&width=400"
+                image="/images/ajuda.png"
                 category="Educação"
                 goal={75000}
                 raised={45000}
@@ -193,7 +206,7 @@ export default function Home() {
               <ProjectCard
                 title="Reflorestamento Amazônico"
                 description="Iniciativa para reflorestar áreas desmatadas da Amazônia com espécies nativas."
-                image="/placeholder.svg?height=300&width=400"
+                image="/images/amazonia.jpg"
                 category="Meio Ambiente"
                 goal={100000}
                 raised={87500}
@@ -219,19 +232,19 @@ export default function Home() {
               quote="A ZKgiveAway me permitiu ajudar causas importantes sem expor minha identidade. O processo é simples e seguro."
               author="Doador Anônimo"
               role="Doador"
-              avatar="/placeholder.svg?height=100&width=100"
+              avatar="/images/anonimo.png"
             />
             <TestimonialCard
               quote="Graças às doações recebidas, conseguimos expandir nosso projeto de educação para mais três comunidades."
               author="Maria Silva"
               role="Coordenadora de Projeto"
-              avatar="/placeholder.svg?height=100&width=100"
+              avatar="/images/maria.png"
             />
             <TestimonialCard
               quote="A transparência da plataforma me dá confiança para doar. Posso ver exatamente como meu dinheiro está sendo usado."
               author="João Santos"
               role="Doador Recorrente"
-              avatar="/placeholder.svg?height=100&width=100"
+              avatar="/images/jose.png"
             />
           </div>
         </section>
@@ -310,13 +323,13 @@ export default function Home() {
             <div>
               <div className="w-40 h-12 bg-gray-900 rounded-md flex items-center justify-center mb-6">
                 <Image
-  src="/images/Faviicon.png"
-  alt="Logo ZKgiveAway"
-  width={120}
-  height={40}
-  className="mb-6"
-  priority
-/>
+                  src="/images/Faviicon.png"
+                  alt="Logo ZKgiveAway"
+                  width={120}
+                  height={40}
+                  className="mb-6"
+                  priority
+                />
               </div>
               <p className="text-gray-400 mb-6">
                 Plataforma de doações anônimas usando tecnologia blockchain para garantir privacidade e transparência.
