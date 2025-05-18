@@ -4,7 +4,7 @@ pragma solidity ^0.8.20;
 contract DonationManager {
     address public owner;
     uint256 public donationCount;
-    uint256 public fee; 
+    uint256 public totalFee; 
     struct Donation {
         address author;
         string title;
@@ -16,7 +16,7 @@ contract DonationManager {
 
     mapping(uint256 => Donation) public donations;
 
-    event DonationCreated(uint256 indexed donationId, address indexed author, string title, uint256 suggestedAmount);
+    event DonationCreated(uint256 indexed donationId, string title, uint256 suggestedAmount);
     event DonationEdited(uint256 indexed donationId, string newTitle, string newDescription, uint256 newSuggestedAmount);
     event DonationReceived(uint256 indexed donationId, address indexed donor, uint256 amount);
 
@@ -34,7 +34,7 @@ contract DonationManager {
         owner = msg.sender;
     }
 
-    function createDonation(address author, string memory title, string memory description, uint256 suggestedAmount) external onlyOwner returns (uint256) {
+    function createDonation(string memory title, string memory description, uint256 suggestedAmount) external onlyOwner returns (uint256) {
         donationCount++;
         donations[donationCount] = Donation({
             author: msg.sender,
@@ -44,7 +44,7 @@ contract DonationManager {
             totalReceived: 0,
             exists: true
         });
-        emit DonationCreated(donationCount, author, title, suggestedAmount);
+        emit DonationCreated(donationCount, title, suggestedAmount);
         return donationCount;
     }
 
@@ -63,13 +63,13 @@ contract DonationManager {
         emit DonationReceived(donationId, msg.sender, msg.value);
     }
 
-    function withdraw(uint256 donationId) external onlyOwner donationExists(donationId) {
-    Donation storage d = donations[donationId];
-    require(d.totalReceived > 0, "No funds to withdraw");
-    uint256 amount = d.totalReceived;
-    uint256 feeAmount = (amount * 5) / 100; // 5% fee
-    uint256 amountAfterFee = amount - feeAmount;
-    d.totalReceived = 0; // Zera o saldo após o saque
-    payable(owner).transfer(amountAfterFee);
-}
+    function withdraw(uint256 donationId) public donationExists(donationId) {
+        Donation storage d = donations[donationId];
+        require(d.totalReceived > 0, "No funds to withdraw");
+        uint256 amount = d.totalReceived - ((d.totalReceived * 5) / 100);// 5% fee
+        totalFee += (d.totalReceived * 5) / 100;
+        d.totalReceived = 0;
+        d.exists = false;
+        payable(d.author).transfer(amount);
+    }
 }
