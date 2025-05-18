@@ -16,7 +16,8 @@ export default function RequestForm() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    imageUrl: "https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg",
+    imageUrl:
+      "https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg",
     amount: "0",
   });
   const [files, setFiles] = useState<File[]>([]);
@@ -73,6 +74,7 @@ export default function RequestForm() {
           description: "Sua solicitação foi enviada para a blockchain!",
         });
       } catch (err: any) {
+        console.error("Erro ao criar donation:", err);
         toast({
           title: "Erro ao criar solicitação",
           description: err.message || "Erro ao interagir com o contrato.",

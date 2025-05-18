@@ -1,19 +1,27 @@
-import { Button } from "@/components/ui/button"
-import { Lock, Shield, Coins, ArrowRight, ChevronRight, Gift, Sparkles } from "lucide-react"
-import RequestForm from "@/components/request-form"
-import ConnectWalletButton from "@/components/wallet/connect-wallet-button"
-import CryptoDonationForm from "@/components/donation/crypto-donation-form"
-import { ProjectCard } from "@/components/project-card"
-import { TestimonialCard } from "@/components/testimonial-card"
-import { DonateButton } from "@/components/donate-button"
-import { ScrollToTop } from "@/components/scroll-to-top"
-import Link from "next/link"
-import { useEffect, useState } from "react"
-import Image from "next/image"
+import { Button } from "@/components/ui/button";
+import {
+  Lock,
+  Shield,
+  Coins,
+  ArrowRight,
+  ChevronRight,
+  Gift,
+  Sparkles,
+} from "lucide-react";
+import RequestForm from "@/components/request-form";
+import ConnectWalletButton from "@/components/wallet/connect-wallet-button";
+import CryptoDonationForm from "@/components/donation/crypto-donation-form";
+import DonationsGrid from "@/components/DonationsGrid";
 
+import { TestimonialCard } from "@/components/testimonial-card";
+import { DonateButton } from "@/components/donate-button";
+import { ScrollToTop } from "@/components/scroll-to-top";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function Home() {
-  const year = 2025
+  const year = 2025;
 
   return (
     <div className="min-h-screen bg-white">
@@ -32,19 +40,34 @@ export default function Home() {
             </div>
           </Link>
           <nav className="hidden md:flex gap-8">
-            <a href="#top" className="font-medium hover:text-[#FFCC33] transition-colors">
+            <a
+              href="#top"
+              className="font-medium hover:text-[#FFCC33] transition-colors"
+            >
               Início
             </a>
-            <a href="#about" className="font-medium hover:text-[#FFCC33] transition-colors">
+            <a
+              href="#about"
+              className="font-medium hover:text-[#FFCC33] transition-colors"
+            >
               Sobre
             </a>
-            <a href="#projects" className="font-medium hover:text-[#FFCC33] transition-colors">
+            <a
+              href="#projects"
+              className="font-medium hover:text-[#FFCC33] transition-colors"
+            >
               Projetos
             </a>
-            <Link href="/doacoes" className="font-medium hover:text-[#FFCC33] transition-colors">
+            <Link
+              href="/doacoes"
+              className="font-medium hover:text-[#FFCC33] transition-colors"
+            >
               Doações
             </Link>
-            <a href="#donate" className="font-medium hover:text-[#FFCC33] transition-colors">
+            <a
+              href="#donate"
+              className="font-medium hover:text-[#FFCC33] transition-colors"
+            >
               Doar
             </a>
           </nav>
@@ -85,8 +108,9 @@ export default function Home() {
                   </h1>
                 </div>
                 <p className="text-lg md:text-xl text-white/90 max-w-md">
-                  ZKgiveAway permite doações seguras e anônimas usando tecnologia blockchain, facilitando a ajuda aos
-                  necessitados sem comprometer sua privacidade.
+                  ZKgiveAway permite doações seguras e anônimas usando
+                  tecnologia blockchain, facilitando a ajuda aos necessitados
+                  sem comprometer sua privacidade.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <DonateButton />
@@ -119,15 +143,20 @@ export default function Home() {
         </section>
 
         {/* How It Works / About Section */}
-        <section id="about" className="container mx-auto px-4 md:px-6 py-20 md:py-32">
+        <section
+          id="about"
+          className="container mx-auto px-4 md:px-6 py-20 md:py-32"
+        >
           <div className="text-center mb-16">
             <div className="inline-block bg-[#FFCC33]/10 px-4 py-1 rounded-full text-sm font-medium text-[#FFCC33] mb-4">
               Processo Simplificado
             </div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">Como Funciona</h2>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
+              Como Funciona
+            </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Nossa plataforma usa provas de conhecimento zero para garantir anonimato completo enquanto mantém a
-              transparência.
+              Nossa plataforma usa provas de conhecimento zero para garantir
+              anonimato completo enquanto mantém a transparência.
             </p>
           </div>
 
@@ -138,9 +167,13 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-bold mb-4">Cadastro Seguro</h3>
               <p className="text-gray-600">
-                Organizações e indivíduos podem se cadastrar com informações mínimas, verificadas com segurança.
+                Organizações e indivíduos podem se cadastrar com informações
+                mínimas, verificadas com segurança.
               </p>
-              <a href="#about" className="inline-flex items-center text-[#FFCC33] font-medium mt-4 hover:underline">
+              <a
+                href="#about"
+                className="inline-flex items-center text-[#FFCC33] font-medium mt-4 hover:underline"
+              >
                 Saiba mais <ChevronRight className="h-4 w-4 ml-1" />
               </a>
             </div>
@@ -151,9 +184,13 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-bold mb-4">Doações Anônimas</h3>
               <p className="text-gray-600">
-                Doe sem revelar sua identidade, garantindo que sua contribuição chegue às mãos certas.
+                Doe sem revelar sua identidade, garantindo que sua contribuição
+                chegue às mãos certas.
               </p>
-              <a href="#about" className="inline-flex items-center text-[#FFCC33] font-medium mt-4 hover:underline">
+              <a
+                href="#about"
+                className="inline-flex items-center text-[#FFCC33] font-medium mt-4 hover:underline"
+              >
                 Saiba mais <ChevronRight className="h-4 w-4 ml-1" />
               </a>
             </div>
@@ -162,9 +199,17 @@ export default function Home() {
               <div className="bg-[#FFCC33]/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Coins className="w-10 h-10 text-[#FFCC33]" />
               </div>
-              <h3 className="text-2xl font-bold mb-4">Rastreamento Transparente</h3>
-              <p className="text-gray-600">Acompanhe o impacto da sua doação sem comprometer sua privacidade.</p>
-              <a href="#about" className="inline-flex items-center text-[#FFCC33] font-medium mt-4 hover:underline">
+              <h3 className="text-2xl font-bold mb-4">
+                Rastreamento Transparente
+              </h3>
+              <p className="text-gray-600">
+                Acompanhe o impacto da sua doação sem comprometer sua
+                privacidade.
+              </p>
+              <a
+                href="#about"
+                className="inline-flex items-center text-[#FFCC33] font-medium mt-4 hover:underline"
+              >
                 Saiba mais <ChevronRight className="h-4 w-4 ml-1" />
               </a>
             </div>
@@ -179,9 +224,12 @@ export default function Home() {
                 <div className="inline-block bg-[#FFCC33]/10 px-4 py-1 rounded-full text-sm font-medium text-[#FFCC33] mb-4">
                   Projetos em Destaque
                 </div>
-                <h2 className="text-3xl md:text-5xl font-bold mb-4">Causas que Apoiamos</h2>
+                <h2 className="text-3xl md:text-5xl font-bold mb-4">
+                  Causas que Apoiamos
+                </h2>
                 <p className="text-gray-600 max-w-2xl">
-                  Conheça alguns dos projetos que estão recebendo doações anônimas através da nossa plataforma.
+                  Conheça alguns dos projetos que estão recebendo doações
+                  anônimas através da nossa plataforma.
                 </p>
               </div>
               <Button className="mt-4 md:mt-0 bg-[#FFCC33] hover:bg-[#E6B800] text-black rounded-full">
@@ -189,32 +237,8 @@ export default function Home() {
               </Button>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              <ProjectCard
-                title="Água Potável para Comunidades"
-                description="Projeto que leva água potável para comunidades rurais."
-                image="/images/agua.png"
-                category="Infraestrutura"
-                goal={50000}
-                raised={32500}
-              />
-              <ProjectCard
-                title="Educação Digital para Todos"
-                description="Fornecendo computadores e acesso à internet para escolas em áreas carentes."
-                image="/images/ajuda.png"
-                category="Educação"
-                goal={75000}
-                raised={45000}
-              />
-              <ProjectCard
-                title="Reflorestamento Amazônico"
-                description="Iniciativa para reflorestar áreas desmatadas da Amazônia com espécies nativas."
-                image="/images/amazonia.jpg"
-                category="Meio Ambiente"
-                goal={100000}
-                raised={87500}
-              />
-            </div>
+            {<DonationsGrid />}
+            
           </div>
         </section>
 
@@ -224,9 +248,12 @@ export default function Home() {
             <div className="inline-block bg-[#FFCC33]/10 px-4 py-1 rounded-full text-sm font-medium text-[#FFCC33] mb-4">
               Depoimentos
             </div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">O Que Dizem Sobre Nós</h2>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
+              O Que Dizem Sobre Nós
+            </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Veja o que doadores e beneficiários estão falando sobre a plataforma ZKgiveAway.
+              Veja o que doadores e beneficiários estão falando sobre a
+              plataforma ZKgiveAway.
             </p>
           </div>
 
@@ -263,9 +290,12 @@ export default function Home() {
               <div className="inline-block bg-[#FFCC33]/10 px-4 py-1 rounded-full text-sm font-medium text-[#FFCC33] mb-4">
                 Participe
               </div>
-              <h2 className="text-3xl md:text-5xl font-bold mb-4">Faça Parte da Mudança</h2>
+              <h2 className="text-3xl md:text-5xl font-bold mb-4">
+                Faça Parte da Mudança
+              </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
-                Seja doando ou solicitando ajuda, você pode fazer parte desta rede de impacto positivo.
+                Seja doando ou solicitando ajuda, você pode fazer parte desta
+                rede de impacto positivo.
               </p>
             </div>
 
@@ -275,7 +305,9 @@ export default function Home() {
                   <div className="bg-[#FFCC33]/10 p-3 rounded-full">
                     <Gift className="h-6 w-6 text-[#FFCC33]" />
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-bold">Solicitar Assistência</h2>
+                  <h2 className="text-2xl md:text-3xl font-bold">
+                    Solicitar Assistência
+                  </h2>
                 </div>
                 <RequestForm />
               </div>
@@ -285,7 +317,9 @@ export default function Home() {
                   <div className="bg-[#FFCC33]/10 p-3 rounded-full">
                     <Sparkles className="h-6 w-6 text-[#FFCC33]" />
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-bold">Faça uma Doação</h2>
+                  <h2 className="text-2xl md:text-3xl font-bold">
+                    Faça uma Doação
+                  </h2>
                 </div>
                 <CryptoDonationForm />
               </div>
@@ -298,13 +332,18 @@ export default function Home() {
           <div className="bg-[#FFCC33] rounded-3xl p-8 md:p-16 text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-[url('/placeholder.svg?height=600&width=1200')] opacity-10 bg-cover bg-center"></div>
             <div className="relative z-10 max-w-3xl mx-auto">
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-black">Pronto para Fazer a Diferença?</h2>
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-black">
+                Pronto para Fazer a Diferença?
+              </h2>
               <p className="text-xl text-black/80 mb-8">
-                Junte-se a milhares de pessoas que estão usando a tecnologia blockchain para criar um impacto positivo
-                no mundo.
+                Junte-se a milhares de pessoas que estão usando a tecnologia
+                blockchain para criar um impacto positivo no mundo.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <Button size="lg" className="bg-black hover:bg-gray-800 text-white rounded-full px-8">
+                <Button
+                  size="lg"
+                  className="bg-black hover:bg-gray-800 text-white rounded-full px-8"
+                >
                   Começar a Doar
                 </Button>
                 <Button
@@ -335,29 +374,42 @@ export default function Home() {
                 />
               </div>
               <p className="text-gray-400 mb-6">
-                Plataforma de doações anônimas usando tecnologia blockchain para garantir privacidade e transparência.
+                Plataforma de doações anônimas usando tecnologia blockchain para
+                garantir privacidade e transparência.
               </p>
             </div>
             <div>
               <h3 className="font-bold text-lg mb-4">Links Rápidos</h3>
               <ul className="space-y-2">
                 <li>
-                  <a href="#top" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
+                  <a
+                    href="#top"
+                    className="text-gray-400 hover:text-[#FFCC33] transition-colors"
+                  >
                     Início
                   </a>
                 </li>
                 <li>
-                  <a href="#about" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
+                  <a
+                    href="#about"
+                    className="text-gray-400 hover:text-[#FFCC33] transition-colors"
+                  >
                     Sobre Nós
                   </a>
                 </li>
                 <li>
-                  <a href="#projects" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
+                  <a
+                    href="#projects"
+                    className="text-gray-400 hover:text-[#FFCC33] transition-colors"
+                  >
                     Projetos
                   </a>
                 </li>
                 <li>
-                  <a href="#donate" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
+                  <a
+                    href="#donate"
+                    className="text-gray-400 hover:text-[#FFCC33] transition-colors"
+                  >
                     Doar
                   </a>
                 </li>
@@ -367,22 +419,34 @@ export default function Home() {
               <h3 className="font-bold text-lg mb-4">Recursos</h3>
               <ul className="space-y-2">
                 <li>
-                  <a href="/faq" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
+                  <a
+                    href="/faq"
+                    className="text-gray-400 hover:text-[#FFCC33] transition-colors"
+                  >
                     FAQ
                   </a>
                 </li>
                 <li>
-                  <a href="/blog" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
+                  <a
+                    href="/blog"
+                    className="text-gray-400 hover:text-[#FFCC33] transition-colors"
+                  >
                     Blog
                   </a>
                 </li>
                 <li>
-                  <a href="/tutorials" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
+                  <a
+                    href="/tutorials"
+                    className="text-gray-400 hover:text-[#FFCC33] transition-colors"
+                  >
                     Tutoriais
                   </a>
                 </li>
                 <li>
-                  <a href="/support" className="text-gray-400 hover:text-[#FFCC33] transition-colors">
+                  <a
+                    href="/support"
+                    className="text-gray-400 hover:text-[#FFCC33] transition-colors"
+                  >
                     Suporte
                   </a>
                 </li>
@@ -397,5 +461,5 @@ export default function Home() {
 
       <ScrollToTop />
     </div>
-  )
+  );
 }

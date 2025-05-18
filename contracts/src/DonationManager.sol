@@ -40,7 +40,7 @@ contract DonationManager {
         string memory description,
         string memory imageUrl, 
         uint256 suggestedAmount
-        ) external onlyOwner returns (uint256) {
+        ) public  returns (uint256) {
         donationCount++;
         donations[donationCount] = Donation({
             author: msg.sender,

@@ -1,22 +1,44 @@
-import { ethers, Signer, Provider, JsonRpcProvider } from "ethers";
-import {
-  DONATION_MANAGER_ABI,
-  DONATION_MANAGER_ADDRESS,
-} from "@/lib/web3/donationManager";
+"use client";
+import { useEffect, useState } from "react";
+import { ethers } from "ethers";
+import abi from "@/lib/web3/abi.json";
 
-// Exemplo de hook para acessar o contrato DonationManager
-export function useDonationManager(
-  signerOrProvider?: Signer | Provider
-) {
-  return new ethers.Contract(
-    DONATION_MANAGER_ADDRESS,
-    DONATION_MANAGER_ABI,
-    signerOrProvider ||
-      new JsonRpcProvider("http://127.0.0.1:8545")
-  );
+const CONTRACT_ADDRESS = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9";
+
+export function useDonations() {
+  const [donations, setDonations] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchDonations() {
+      setLoading(true);
+      try {
+        if (typeof window.ethereum === "undefined") return;
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, provider);
+        const count = await contract.donationCount();
+        const arr = [];
+        for (let i = 1; i <= Number(count); i++) {
+          const d = await contract.donations(i);
+          if (d.exists) {
+            arr.push({
+              id: i,
+              title: d.title,
+              description: d.description,
+              imageUrl: d.imageUrl,
+              suggestedAmount: ethers.formatEther(d.suggestedAmount),
+              totalReceived: ethers.formatEther(d.totalReceived),
+            });
+          }
+        }
+        setDonations(arr);
+      } catch (e) {
+        setDonations([]);
+      }
+      setLoading(false);
+    }
+    fetchDonations();
+  }, []);
+
+  return { donations, loading };
 }
-
-// Exemplo de uso em um componente React/Next.js:
-// const contract = useDonationManager(signer);
-// await contract.createDonation(...)
-// await contract.donate(donationId, { value: ethers.utils.parseEther("0.1") })

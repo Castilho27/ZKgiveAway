@@ -9,7 +9,7 @@ import {
 } from "react";
 import { ethers } from "ethers";
 import { toast } from "@/hooks/use-toast";
-import abi from "@/lib/web3/ABI.json";
+import abi from "@/lib/web3/abi.json";
 
 type WalletContextType = {
   address: string | null;
@@ -33,7 +33,7 @@ type WalletContextType = {
   ) => Promise<ethers.TransactionResponse>;
 };
 
-const CONTRACT_ADDRESS = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"; // Substitua pelo endereço real do contrato
+const CONTRACT_ADDRESS = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"; // Substitua pelo endereço real do contrato
 
 const WalletContext = createContext<WalletContextType>({
   address: null,
