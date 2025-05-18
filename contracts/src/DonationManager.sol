@@ -4,9 +4,9 @@ pragma solidity ^0.8.20;
 contract DonationManager {
     address public owner;
     uint256 public donationCount;
-
+    uint256 public fee; 
     struct Donation {
-        address payable recipient;
+        address author;
         string title;
         string description;
         uint256 suggestedAmount;
@@ -16,7 +16,7 @@ contract DonationManager {
 
     mapping(uint256 => Donation) public donations;
 
-    event DonationCreated(uint256 indexed donationId, address indexed recipient, string title, uint256 suggestedAmount);
+    event DonationCreated(uint256 indexed donationId, address indexed author, string title, uint256 suggestedAmount);
     event DonationEdited(uint256 indexed donationId, string newTitle, string newDescription, uint256 newSuggestedAmount);
     event DonationReceived(uint256 indexed donationId, address indexed donor, uint256 amount);
 
@@ -34,17 +34,17 @@ contract DonationManager {
         owner = msg.sender;
     }
 
-    function createDonation(address payable recipient, string memory title, string memory description, uint256 suggestedAmount) external onlyOwner returns (uint256) {
+    function createDonation(address author, string memory title, string memory description, uint256 suggestedAmount) external onlyOwner returns (uint256) {
         donationCount++;
         donations[donationCount] = Donation({
-            recipient: recipient,
+            author: msg.sender,
             title: title,
             description: description,
             suggestedAmount: suggestedAmount,
             totalReceived: 0,
             exists: true
         });
-        emit DonationCreated(donationCount, recipient, title, suggestedAmount);
+        emit DonationCreated(donationCount, author, title, suggestedAmount);
         return donationCount;
     }
 
@@ -59,8 +59,17 @@ contract DonationManager {
     function donate(uint256 donationId) external payable donationExists(donationId) {
         require(msg.value > 0, "No ETH sent");
         Donation storage d = donations[donationId];
-        d.recipient.transfer(msg.value);
         d.totalReceived += msg.value;
         emit DonationReceived(donationId, msg.sender, msg.value);
+    }
+
+    function withdraw(uint256 donationId) external onlyOwner donationExists(donationId) {
+        Donation storage d = donations[donationId];
+        require(d.totalReceived > 0, "No funds to withdraw");
+        uint256 amount = d.totalReceived;
+        fee = (amount * 5) / 100; // 5% fee
+        uint256 amountAfterFee = amount - fee;
+        d.totalReceived = amountAfterFee;
+        payable(owner).transfer(amountAfterFee);
     }
 }
