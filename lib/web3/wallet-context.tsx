@@ -206,12 +206,16 @@ export const WalletProvider = ({ children }: WalletProviderProps) => {
         });
       }
     } catch (error: any) {
-      console.error("Erro ao conectar carteira:", error);
+      // Não exibe erro no console se o usuário rejeitou a conexão (code 4001)
+      if (error?.code !== 4001) {
+        console.error("Erro ao conectar carteira:", error);
+      }
       toast({
         title: "Falha na conexão",
         description:
-          error.message ||
-          "Falha ao conectar carteira. Por favor, tente novamente.",
+          error?.code === 4001
+            ? "Conexão cancelada pelo usuário."
+            : error?.message || "Falha ao conectar carteira. Por favor, tente novamente.",
         variant: "destructive",
       });
     } finally {

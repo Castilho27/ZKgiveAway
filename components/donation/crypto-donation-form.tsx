@@ -1,20 +1,31 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ethers } from "ethers"
-import { useWallet } from "@/lib/web3/wallet-context"
-import { toast } from "@/hooks/use-toast"
-import { Loader2, AlertCircle, CheckCircle2, Wallet } from "lucide-react"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { ethers } from "ethers";
+import { useWallet } from "@/lib/web3/wallet-context";
+
+import { toast } from "@/hooks/use-toast";
+import { Loader2, AlertCircle, CheckCircle2, Wallet } from "lucide-react";
+import { useDonations } from "@/hooks/useDonationManager";
 
 export default function CryptoDonationForm() {
-  const { isConnected, address, signer, donateToContract } = useWallet() 
-  const [amount, setAmount] = useState("")
-  const [token, setToken] = useState("ETH")
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [txHash, setTxHash] = useState<string | null>(null)
+  const { isConnected, address, signer, donateToContract, connectWallet } =
+    useWallet();
+
+  const { donations, loading } = useDonations();
+  const [amount, setAmount] = useState("");
+  const [selectedDonation, setSelectedDonation] = useState<string>("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [txHash, setTxHash] = useState<string | null>(null);
 
   const handleDonate = async () => {
     if (!isConnected || !signer || !address) {
@@ -22,8 +33,8 @@ export default function CryptoDonationForm() {
         title: "Carteira não conectada",
         description: "Por favor, conecte sua carteira para fazer uma doação.",
         variant: "destructive",
-      })
-      return
+      });
+      return;
     }
 
     if (!amount || Number.parseFloat(amount) <= 0) {
@@ -31,64 +42,75 @@ export default function CryptoDonationForm() {
         title: "Valor inválido",
         description: "Por favor, insira um valor de doação válido.",
         variant: "destructive",
-      })
-      return
+      });
+      return;
     }
 
-    setIsSubmitting(true)
+    if (!selectedDonation) {
+      toast({
+        title: "Selecione uma causa",
+        description: "Escolha uma doação para contribuir.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
 
     try {
-      // Chame a função donateToContract do contexto, passando o id da doação (exemplo: 1) e o valor
-      // Ajuste para pegar o id correto conforme sua lógica
-      const donationId = 1
-      const tx = await donateToContract(donationId, amount)
-      setTxHash(tx.hash)
+      const donationId = Number(selectedDonation);
+      const tx = await donateToContract(donationId, amount);
+      setTxHash(tx.hash);
 
       toast({
         title: "Doação enviada",
         description: "Sua transação foi enviada para a blockchain.",
-      })
+      });
 
-      // Wait for transaction to be mined
-      const receipt = await tx.wait()
+      const receipt = await tx.wait();
 
       if (receipt && receipt.status === 1) {
         toast({
           title: "Doação bem-sucedida",
           description: "Obrigado pela sua doação!",
-        })
+        });
       } else {
         toast({
           title: "Transação falhou",
-          description: "Sua transação de doação falhou. Por favor, tente novamente.",
+          description:
+            "Sua transação de doação falhou. Por favor, tente novamente.",
           variant: "destructive",
-        })
+        });
       }
     } catch (error: any) {
-      console.error("Erro na doação:", error)
+      console.error("Erro na doação:", error);
       toast({
         title: "Doação falhou",
         description: error.message || "Houve um erro ao processar sua doação.",
         variant: "destructive",
-      })
+      });
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   if (!isConnected) {
     return (
       <div className="p-6 border border-gray-200 rounded-xl bg-gray-50 text-center space-y-4 flex flex-col items-center justify-center min-h-[300px]">
         <h3 className="font-medium text-lg">Conecte a Carteira para Doar</h3>
-        <p className="text-gray-600 text-sm">Conecte sua carteira de criptomoedas para fazer uma doação anônima.</p>
+        <p className="text-gray-600 text-sm">
+          Conecte sua carteira de criptomoedas para fazer uma doação anônima.
+        </p>
         <div className="flex justify-center pt-2">
-          <Button className="bg-[#FFCC33] hover:bg-[#E6B800] text-black rounded-full">
+          <Button className="bg-[#FFCC33] hover:bg-[#E6B800] text-black rounded-full"
+            onClick={() => connectWallet("metamask")}
+          >
             <Wallet className="h-4 w-4 mr-2" />
             Conectar Carteira
           </Button>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -97,14 +119,18 @@ export default function CryptoDonationForm() {
         <div className="bg-green-50 border border-green-100 rounded-xl p-6 text-center space-y-4">
           <CheckCircle2 className="h-12 w-12 text-green-500 mx-auto" />
           <h3 className="font-medium text-lg">Doação Enviada!</h3>
-          <p className="text-sm text-gray-600">Sua transação foi enviada para a blockchain.</p>
-          <div className="text-xs text-gray-500 break-all bg-white p-3 rounded-lg">Hash da Transação: {txHash}</div>
+          <p className="text-sm text-gray-600">
+            Sua transação foi enviada para a blockchain.
+          </p>
+          <div className="text-xs text-gray-500 break-all bg-white p-3 rounded-lg">
+            Hash da Transação: {txHash}
+          </div>
           <Button
             variant="outline"
             className="text-sm rounded-full"
             onClick={() => {
-              setTxHash(null)
-              setAmount("")
+              setTxHash(null);
+              setAmount("");
             }}
           >
             Fazer Outra Doação
@@ -113,19 +139,27 @@ export default function CryptoDonationForm() {
       ) : (
         <>
           <div className="space-y-3">
-            <label className="block text-sm font-medium">Selecione a Moeda</label>
-            <Select defaultValue="ETH" onValueChange={setToken}>
+            <label className="block text-sm font-medium">
+              Selecione a Causa
+            </label>
+            <Select
+              value={selectedDonation}
+              onValueChange={setSelectedDonation}
+              disabled={loading}
+            >
               <SelectTrigger className="rounded-xl">
-                <SelectValue placeholder="Selecione a moeda" />
+                <SelectValue
+                  placeholder={
+                    loading ? "Carregando causas..." : "Selecione uma causa"
+                  }
+                />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="ETH">Ethereum (ETH)</SelectItem>
-                <SelectItem value="USDT" disabled>
-                  USDT (Em Breve)
-                </SelectItem>
-                <SelectItem value="USDC" disabled>
-                  USDC (Em Breve)
-                </SelectItem>
+                {donations.map((donation) => (
+                  <SelectItem key={donation.id} value={donation.id.toString()}>
+                    {donation.title} - {donation.suggestedAmount} ETH
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
@@ -142,8 +176,8 @@ export default function CryptoDonationForm() {
                 step="0.01"
                 min="0"
               />
-              <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
-                {token === "ETH" ? "Ξ" : "R$"}
+              <div className="absolute left-2 top-1/2 text-sm -translate-y-1/2 text-gray-500">
+                R$
               </div>
             </div>
           </div>
@@ -153,15 +187,21 @@ export default function CryptoDonationForm() {
             <div>
               <p className="font-medium">Doação Anônima</p>
               <p className="text-gray-600 text-xs mt-1">
-                Sua doação será processada na blockchain. Embora o endereço da sua carteira fique visível na rede,
-                nenhuma informação pessoal será coletada ou armazenada.
+                Sua doação será processada na blockchain. Embora o endereço da
+                sua carteira fique visível na rede, nenhuma informação pessoal
+                será coletada ou armazenada.
               </p>
             </div>
           </div>
 
           <Button
             onClick={handleDonate}
-            disabled={isSubmitting || !amount || Number.parseFloat(amount) <= 0}
+            disabled={
+              isSubmitting ||
+              !amount ||
+              Number.parseFloat(amount) <= 0 ||
+              !selectedDonation
+            }
             className="w-full bg-[#FFCC33] hover:bg-[#E6B800] text-black rounded-full py-6"
           >
             {isSubmitting ? (
@@ -176,5 +216,5 @@ export default function CryptoDonationForm() {
         </>
       )}
     </div>
-  )
+  );
 }
