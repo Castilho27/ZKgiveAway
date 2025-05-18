@@ -64,12 +64,12 @@ contract DonationManager {
     }
 
     function withdraw(uint256 donationId) external onlyOwner donationExists(donationId) {
-        Donation storage d = donations[donationId];
-        require(d.totalReceived > 0, "No funds to withdraw");
-        uint256 amount = d.totalReceived;
-        fee = (amount * 5) / 100; // 5% fee
-        uint256 amountAfterFee = amount - fee;
-        d.totalReceived = amountAfterFee;
-        payable(owner).transfer(amountAfterFee);
-    }
+    Donation storage d = donations[donationId];
+    require(d.totalReceived > 0, "No funds to withdraw");
+    uint256 amount = d.totalReceived;
+    uint256 feeAmount = (amount * 5) / 100; // 5% fee
+    uint256 amountAfterFee = amount - feeAmount;
+    d.totalReceived = 0; // Zera o saldo após o saque
+    payable(owner).transfer(amountAfterFee);
+}
 }
