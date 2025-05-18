@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -9,27 +9,36 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { Wallet, LogOut, Loader2 } from "lucide-react"
-import { useWallet } from "@/lib/web3/wallet-context"
-import Image from "next/image"
+} from "@/components/ui/dialog";
+import { Wallet, LogOut, Loader2 } from "lucide-react";
+import { useWallet } from "@/lib/web3/wallet-context";
+import Image from "next/image";
 
 export default function ConnectWalletButton() {
-  const { isConnected, isConnecting, address, balance, connectWallet, disconnectWallet } = useWallet()
-  const [isOpen, setIsOpen] = useState(false)
+  const {
+    isConnected,
+    isConnecting,
+    address,
+    balance,
+    connectWallet,
+    disconnectWallet,
+  } = useWallet();
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleConnect = async (type: "metamask" | "walletconnect") => {
-    await connectWallet(type)
-    setIsOpen(false)
-  }
+    await connectWallet(type);
+    setIsOpen(false);
+  };
 
   const handleDisconnect = () => {
-    disconnectWallet()
-  }
+    disconnectWallet();
+  };
 
   const formatAddress = (address: string) => {
-    return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`
-  }
+    return `${address.substring(0, 6)}...${address.substring(
+      address.length - 4
+    )}`;
+  };
 
   if (isConnected && address) {
     return (
@@ -37,7 +46,9 @@ export default function ConnectWalletButton() {
         <div className="hidden md:flex flex-col items-end">
           <span className="text-sm font-medium">{formatAddress(address)}</span>
           <span className="text-xs text-gray-500">
-            {balance ? `${Number.parseFloat(balance).toFixed(4)} ETH` : "Carregando..."}
+            {balance
+              ? `${Number.parseFloat(balance).toFixed(4)} ETH`
+              : "Carregando..."}
           </span>
         </div>
         <Button
@@ -50,7 +61,7 @@ export default function ConnectWalletButton() {
           <span className="md:hidden">Desconectar</span>
         </Button>
       </div>
-    )
+    );
   }
 
   return (
@@ -65,7 +76,8 @@ export default function ConnectWalletButton() {
         <DialogHeader>
           <DialogTitle>Conecte sua carteira</DialogTitle>
           <DialogDescription>
-            Conecte sua carteira preferida para fazer doações anônimas com criptomoedas.
+            Conecte sua carteira preferida para fazer doações anônimas com
+            criptomoedas.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
@@ -76,7 +88,12 @@ export default function ConnectWalletButton() {
           >
             <div className="flex items-center">
               <div className="w-8 h-8 mr-4">
-                <Image src="/images/metamask.png" alt="MetaMask" width={32} height={32} />
+                <Image
+                  src="/images/metamask.png"
+                  alt="MetaMask"
+                  width={32}
+                  height={32}
+                />
               </div>
               <span>MetaMask</span>
             </div>
@@ -91,17 +108,25 @@ export default function ConnectWalletButton() {
           >
             <div className="flex items-center">
               <div className="w-8 h-8 mr-4">
-                <Image src="/images/wallet.png" alt="WalletConnect" width={32} height={32} />
+                <Image
+                  src="/images/wallet.png"
+                  alt="WalletConnect"
+                  width={32}
+                  height={32}
+                />
               </div>
               <span>WalletConnect</span>
             </div>
-            <span className="text-xs bg-gray-100 px-2 py-1 rounded-full">Em Breve</span>
+            <span className="text-xs bg-gray-100 px-2 py-1 rounded-full">
+              Em Breve
+            </span>
           </Button>
         </div>
         <div className="text-xs text-gray-500 text-center">
-          Ao conectar sua carteira, você concorda com nossos Termos de Serviço e Política de Privacidade.
+          Ao conectar sua carteira, você concorda com nossos Termos de Serviço e
+          Política de Privacidade.
         </div>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
