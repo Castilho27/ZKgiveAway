@@ -215,7 +215,8 @@ export const WalletProvider = ({ children }: WalletProviderProps) => {
         description:
           error?.code === 4001
             ? "Conexão cancelada pelo usuário."
-            : error?.message || "Falha ao conectar carteira. Por favor, tente novamente.",
+            : error?.message ||
+              "Falha ao conectar carteira. Por favor, tente novamente.",
         variant: "destructive",
       });
     } finally {
@@ -251,7 +252,6 @@ export const WalletProvider = ({ children }: WalletProviderProps) => {
     return tx;
   };
 
-  
   const createDonationOnContract = async (
     title: string,
     description: string,
