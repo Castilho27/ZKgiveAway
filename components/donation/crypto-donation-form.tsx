@@ -10,7 +10,7 @@ import { toast } from "@/hooks/use-toast"
 import { Loader2, AlertCircle, CheckCircle2, Wallet } from "lucide-react"
 
 export default function CryptoDonationForm() {
-  const { isConnected, address, signer } = useWallet()
+  const { isConnected, address, signer, donateToContract } = useWallet() 
   const [amount, setAmount] = useState("")
   const [token, setToken] = useState("ETH")
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -38,16 +38,10 @@ export default function CryptoDonationForm() {
     setIsSubmitting(true)
 
     try {
-      // For this example, we'll send ETH to a donation address
-      // In a real application, you would use a smart contract
-      const donationAddress = "0x0000000000000000000000000000000000000000" // Replace with actual donation address
-
-      // Create transaction
-      const tx = await signer.sendTransaction({
-        to: donationAddress,
-        value: ethers.parseEther(amount),
-      })
-
+      // Chame a função donateToContract do contexto, passando o id da doação (exemplo: 1) e o valor
+      // Ajuste para pegar o id correto conforme sua lógica
+      const donationId = 1
+      const tx = await donateToContract(donationId, amount)
       setTxHash(tx.hash)
 
       toast({
