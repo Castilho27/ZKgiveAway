@@ -76,7 +76,7 @@ export default function ConnectWalletButton() {
           >
             <div className="flex items-center">
               <div className="w-8 h-8 mr-4">
-                <Image src="/placeholder.svg?height=32&width=32" alt="MetaMask" width={32} height={32} />
+                <Image src="/images/metamask.png" alt="MetaMask" width={32} height={32} />
               </div>
               <span>MetaMask</span>
             </div>
@@ -91,7 +91,7 @@ export default function ConnectWalletButton() {
           >
             <div className="flex items-center">
               <div className="w-8 h-8 mr-4">
-                <Image src="/placeholder.svg?height=32&width=32" alt="WalletConnect" width={32} height={32} />
+                <Image src="/images/wallet.png" alt="WalletConnect" width={32} height={32} />
               </div>
               <span>WalletConnect</span>
             </div>
