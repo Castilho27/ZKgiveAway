@@ -63,15 +63,4 @@ contract DonationManager {
         d.totalReceived += msg.value;
         emit DonationReceived(donationId, msg.sender, msg.value);
     }
-
-    function getDonation(uint256 donationId) external view donationExists(donationId) returns (
-        address recipient,
-        string memory title,
-        string memory description,
-        uint256 suggestedAmount,
-        uint256 totalReceived
-    ) {
-        Donation storage d = donations[donationId];
-        return (d.recipient, d.title, d.description, d.suggestedAmount, d.totalReceived);
-    }
 }
