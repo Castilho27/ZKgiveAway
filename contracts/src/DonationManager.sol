@@ -9,6 +9,7 @@ contract DonationManager {
         address author;
         string title;
         string description;
+        string imageUrl;
         uint256 suggestedAmount;
         uint256 totalReceived;
         bool exists;
@@ -34,12 +35,18 @@ contract DonationManager {
         owner = msg.sender;
     }
 
-    function createDonation(string memory title, string memory description, uint256 suggestedAmount) external onlyOwner returns (uint256) {
+    function createDonation(
+        string memory title, 
+        string memory description,
+        string memory imageUrl, 
+        uint256 suggestedAmount
+        ) external onlyOwner returns (uint256) {
         donationCount++;
         donations[donationCount] = Donation({
             author: msg.sender,
             title: title,
             description: description,
+            imageUrl: imageUrl,
             suggestedAmount: suggestedAmount,
             totalReceived: 0,
             exists: true
@@ -72,4 +79,4 @@ contract DonationManager {
         d.exists = false;
         payable(d.author).transfer(amount);
     }
-}
+}   
