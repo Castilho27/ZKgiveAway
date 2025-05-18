@@ -41,6 +41,9 @@ export default function Home() {
             <a href="#projects" className="font-medium hover:text-[#FFCC33] transition-colors">
               Projetos
             </a>
+            <Link href="/doacoes" className="font-medium hover:text-[#FFCC33] transition-colors">
+              Doações
+            </Link>
             <a href="#donate" className="font-medium hover:text-[#FFCC33] transition-colors">
               Doar
             </a>
@@ -88,8 +91,8 @@ export default function Home() {
                 <div className="flex flex-wrap gap-4">
                   <DonateButton />
                   <Button
-  size="lg"
-  className="
+                    size="lg"
+                    className="
     bg-white hover:bg-gray-100 text-black 
     rounded-full px-8 relative
     transition-all duration-200 ease-out
@@ -97,9 +100,9 @@ export default function Home() {
     border border-gray-200 hover:border-gray-300
     shadow-sm hover:shadow-md
   "
->
-  Solicitar Ajuda
-</Button>
+                  >
+                    Solicitar Ajuda
+                  </Button>
                 </div>
                 <div className="flex items-start pt-4">
                   <div className="inline-block bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-medium">
@@ -107,7 +110,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              
+
               {/* Espaço reservado para alinhamento */}
               <div className="hidden md:block"></div>
             </div>
