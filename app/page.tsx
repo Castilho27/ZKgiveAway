@@ -30,7 +30,7 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <header id="top" className="container mx-auto py-6 px-4 md:px-6">
         <div className="flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="#top" className="flex items-center gap-2">
             <div className="w-32 h-10 bg-white rounded-md flex items-center justify-center">
               <Image
                 src="/images/lofo-Photoroom.png"
@@ -230,8 +230,6 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-
-            {<DonationsGrid />}
             
           </div>
         </section>
@@ -248,9 +246,13 @@ export default function Home() {
                   Conheça alguns dos projetos que estão recebendo doações anônimas através da nossa plataforma.
                 </p>
               </div>
-              <Button className="mt-4 md:mt-0 bg-[#FFCC33] hover:bg-[#E6B800] text-black rounded-full">
-                Ver Todos os Projetos <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              <Link href="#projects" passHref>
+                <Button
+                  className="mt-4 md:mt-0 bg-[#FFCC33] hover:bg-[#E6B800] text-black rounded-full"
+                >
+                  Ver Todos os Projetos <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
@@ -380,19 +382,23 @@ export default function Home() {
                 blockchain para criar um impacto positivo no mundo.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <Button
-                  size="lg"
-                  className="bg-black hover:bg-gray-800 text-white rounded-full px-8"
-                >
-                  Começar a Doar
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-black text-black hover:bg-black/10 rounded-full px-8"
-                >
-                  Saber Mais
-                </Button>
+                <Link href="#projects" passHref>
+                  <Button
+                    size="lg"
+                    className="bg-black hover:bg-gray-800 text-white rounded-full px-8"
+                  >
+                    Começar a Doar
+                  </Button>
+                </Link>
+                <Link href="#about" passHref>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-black text-black hover:bg-black/10 rounded-full px-8"
+                  >
+                    Saber Mais
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
