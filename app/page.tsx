@@ -12,6 +12,9 @@ import RequestForm from "@/components/request-form";
 import ConnectWalletButton from "@/components/wallet/connect-wallet-button";
 import CryptoDonationForm from "@/components/donation/crypto-donation-form";
 import DonationsGrid from "@/components/DonationsGrid";
+import { ProjectCard } from "@/components/project-card";
+
+
 
 import { TestimonialCard } from "@/components/testimonial-card";
 import { DonateButton } from "@/components/donate-button";
@@ -241,7 +244,52 @@ export default function Home() {
             
           </div>
         </section>
+{/* Featured Projects */}
+        <section id="projects" className="bg-gray-50 py-20 md:py-32">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
+              <div>
+                <div className="inline-block bg-[#FFCC33]/10 px-4 py-1 rounded-full text-sm font-medium text-[#FFCC33] mb-4">
+                  Projetos em Destaque
+                </div>
+                <h2 className="text-3xl md:text-5xl font-bold mb-4">Causas que Apoiamos</h2>
+                <p className="text-gray-600 max-w-2xl">
+                  Conheça alguns dos projetos que estão recebendo doações anônimas através da nossa plataforma.
+                </p>
+              </div>
+              <Button className="mt-4 md:mt-0 bg-[#FFCC33] hover:bg-[#E6B800] text-black rounded-full">
+                Ver Todos os Projetos <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
 
+            <div className="grid md:grid-cols-3 gap-8">
+              <ProjectCard
+                title="Água Potável para Comunidades"
+                description="Projeto que leva água potável para comunidades rurais."
+                image="/images/agua.png"
+                category="Infraestrutura"
+                goal={50000}
+                raised={32500}
+              />
+              <ProjectCard
+                title="Educação Digital para Todos"
+                description="Fornecendo computadores e acesso à internet para escolas em áreas carentes."
+                image="/images/ajuda.png"
+                category="Educação"
+                goal={75000}
+                raised={45000}
+              />
+              <ProjectCard
+                title="Reflorestamento Amazônico"
+                description="Iniciativa para reflorestar áreas desmatadas da Amazônia com espécies nativas."
+                image="/images/amazonia.jpg"
+                category="Meio Ambiente"
+                goal={100000}
+                raised={87500}
+              />
+            </div>
+          </div>
+        </section>
         {/* Testimonials */}
         <section className="container mx-auto px-4 md:px-6 py-20 md:py-32">
           <div className="text-center mb-16">
