@@ -62,10 +62,10 @@ export default function Home() {
               Projetos
             </a>
             <Link
-              href="/doacoes"
+              href="#testimonials"
               className="font-medium hover:text-[#FFCC33] transition-colors"
             >
-              Doações
+              Depoimentos
             </Link>
             <a
               href="#donate"
@@ -220,24 +220,15 @@ export default function Home() {
         </section>
 
         {/* Featured Projects */}
-        <section id="projects" className="bg-gray-50 py-20 md:py-32">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
+        <section>
+          <div>
+            <div >
               <div>
-                <div className="inline-block bg-[#FFCC33]/10 px-4 py-1 rounded-full text-sm font-medium text-[#FFCC33] mb-4">
-                  Projetos em Destaque
+                <div>
                 </div>
-                <h2 className="text-3xl md:text-5xl font-bold mb-4">
-                  Causas que Apoiamos
+                <h2>
                 </h2>
-                <p className="text-gray-600 max-w-2xl">
-                  Conheça alguns dos projetos que estão recebendo doações
-                  anônimas através da nossa plataforma.
-                </p>
               </div>
-              <Button className="mt-4 md:mt-0 bg-[#FFCC33] hover:bg-[#E6B800] text-black rounded-full">
-                Ver Todos os Projetos <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
             </div>
 
             {<DonationsGrid />}
@@ -274,7 +265,7 @@ export default function Home() {
               <ProjectCard
                 title="Educação Digital para Todos"
                 description="Fornecendo computadores e acesso à internet para escolas em áreas carentes."
-                image="/images/ajuda.png"
+                image="/images/Ajuda.png"
                 category="Educação"
                 goal={75000}
                 raised={45000}
@@ -291,6 +282,7 @@ export default function Home() {
           </div>
         </section>
         {/* Testimonials */}
+        <section id="testimonials" className="container mx-auto px--5 md:px--5 py-5 md:py-15"></section>
         <section className="container mx-auto px-4 md:px-6 py-20 md:py-32">
           <div className="text-center mb-16">
             <div className="inline-block bg-[#FFCC33]/10 px-4 py-1 rounded-full text-sm font-medium text-[#FFCC33] mb-4">
@@ -329,51 +321,51 @@ export default function Home() {
 
         {/* Request and Donate Section */}
         <section
-          id="donate"
-          className="bg-gradient-to-br from-gray-50 to-gray-100 py-20 md:py-32 relative overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-[url('/placeholder.svg?height=800&width=1600')] opacity-5 bg-cover bg-center"></div>
-          <div className="container mx-auto px-4 md:px-6 relative z-10">
-            <div className="text-center mb-16">
-              <div className="inline-block bg-[#FFCC33]/10 px-4 py-1 rounded-full text-sm font-medium text-[#FFCC33] mb-4">
-                Participe
-              </div>
-              <h2 className="text-3xl md:text-5xl font-bold mb-4">
-                Faça Parte da Mudança
-              </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
-                Seja doando ou solicitando ajuda, você pode fazer parte desta
-                rede de impacto positivo.
-              </p>
-            </div>
+  id="donate"
+  className="bg-gradient-to-br from-gray-50 to-gray-100 py-20 md:py-32 relative overflow-hidden"
+>
+  <div className="absolute inset-0 bg-[url('/placeholder.svg?height=800&width=1600')] opacity-5 bg-cover bg-center"></div>
+  <div className="container mx-auto px-4 md:px-6 relative z-10">
+    <div className="text-center mb-16">
+      <div className="inline-block bg-[#FFCC33]/10 px-4 py-1 rounded-full text-sm font-medium text-[#FFCC33] mb-4">
+        Participe
+      </div>
+      <h2 className="text-3xl md:text-5xl font-bold mb-4">
+        Faça Parte da Mudança
+      </h2>
+      <p className="text-gray-600 max-w-2xl mx-auto">
+        Seja doando ou solicitando ajuda, você pode fazer parte desta
+        rede de impacto positivo.
+      </p>
+    </div>
 
-            <div className="grid md:grid-cols-2 gap-12 items-start">
-              <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="bg-[#FFCC33]/10 p-3 rounded-full">
-                    <Gift className="h-6 w-6 text-[#FFCC33]" />
-                  </div>
-                  <h2 className="text-2xl md:text-3xl font-bold">
-                    Solicitar Assistência
-                  </h2>
-                </div>
-                <RequestForm />
-              </div>
-
-              <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100 self-start">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="bg-[#FFCC33]/10 p-3 rounded-full">
-                    <Sparkles className="h-6 w-6 text-[#FFCC33]" />
-                  </div>
-                  <h2 className="text-2xl md:text-3xl font-bold">
-                    Faça uma Doação
-                  </h2>
-                </div>
-                <CryptoDonationForm />
-              </div>
-            </div>
+    <div className="grid md:grid-cols-2 gap-12 items-stretch">
+      <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100 h-full">
+        <div className="flex items-center gap-4 mb-6">
+          <div className="bg-[#FFCC33]/10 p-3 rounded-full">
+            <Gift className="h-6 w-6 text-[#FFCC33]" />
           </div>
-        </section>
+          <h2 className="text-2xl md:text-3xl font-bold">
+            Solicitar Assistência
+          </h2>
+        </div>
+        <RequestForm />
+      </div>
+
+      <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100 h-full">
+        <div className="flex items-center gap-4 mb-6">
+          <div className="bg-[#FFCC33]/10 p-3 rounded-full">
+            <Sparkles className="h-6 w-6 text-[#FFCC33]" />
+          </div>
+          <h2 className="text-2xl md:text-3xl font-bold">
+            Faça uma Doação
+          </h2>
+        </div>
+        <CryptoDonationForm />
+      </div>
+    </div>
+  </div>
+</section>
 
         {/* CTA Section */}
         <section className="container mx-auto px-4 md:px-6 py-20 md:py-32">
