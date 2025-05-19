@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button"
+/* import { Button } from "@/components/ui/button"
 import { ArrowLeft, Filter, Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
@@ -55,8 +55,8 @@ export default function DoacoesPage() {
           <p className="text-gray-600">Acompanhe todas as doações realizadas na plataforma</p>
         </div>
 
-        {/* Filtros e Busca */}
-        <div className="flex flex-col md:flex-row gap-4 mb-8">
+        {/* Filtros e Busca */
+        /* <div className="flex flex-col md:flex-row gap-4 mb-8">
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <Input
@@ -69,8 +69,8 @@ export default function DoacoesPage() {
           </Button>
         </div>
 
-        {/* Lista de Doações */}
-        <div className="grid gap-4">
+        {/* Lista de Doações */
+        /*<div className="grid gap-4">
           {donations.map((donation) => (
             <div
               key={donation.id}
@@ -106,7 +106,7 @@ export default function DoacoesPage() {
           ))}
         </div>
 
-        {/* Paginação */}
+        {/* Paginação *//*
         <div className="flex justify-center mt-8">
           <div className="flex gap-2">
             <Button variant="outline" className="rounded-full">Anterior</Button>
@@ -126,3 +126,4 @@ export default function DoacoesPage() {
     </div>
   )
 }
+*/
