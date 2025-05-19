@@ -1,9 +1,9 @@
 import Web3 from "web3";
 import ABI from "./abi.json";
 
-const CONTRACT_ADDRESS = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9";
+const CONTRACT_ADDRESS = "0xB45052a951D8485b5650D8Ab846ea27e55Bc6F7D";
 
-export async function doLogin() {
+export async function doLogin() {     
   if (!window.ethereum) throw new Error("MetaMask is not installed. Please install it to use this app.");
 
   const web3 = new Web3(window.ethereum);

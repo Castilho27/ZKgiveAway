@@ -33,7 +33,7 @@ type WalletContextType = {
   ) => Promise<ethers.TransactionResponse>;
 };
 
-const CONTRACT_ADDRESS = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"; // Substitua pelo endereço real do contrato
+const CONTRACT_ADDRESS = "0xB45052a951D8485b5650D8Ab846ea27e55Bc6F7D"; // Substitua pelo endereço real do contrato
 
 const WalletContext = createContext<WalletContextType>({
   address: null,
